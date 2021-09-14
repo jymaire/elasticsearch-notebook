@@ -87,7 +87,7 @@ Soit mettre la configuration directement. On pourra ensuite choisir d'utiliser o
 PUT _index_template/template_1
 { ... }
 ```
-Parmi les options, il y a le mapping, le pattern des index auquels le template va s'appliquer, les settings de l'index... Pour choisir quel composant va s'appliquer en cas de recoupements des configurations, il faut définir une priorité différente pour chaque composant. (attention aussi aux templates built-in ES : `logs-*-*` , `metrics-*-*` et `synthetics-*-*`)
+Parmi les options, il y a le mapping, le pattern des index auquel le template va s'appliquer, les settings de l'index... Pour choisir quel composant va s'appliquer en cas de recoupements des configurations, il faut définir une priorité différente pour chaque composant. (attention aussi aux templates built-in ES : `logs-*-*` , `metrics-*-*` et `synthetics-*-*`)
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-component-template.html
 https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html
