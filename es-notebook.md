@@ -6,7 +6,7 @@
 
 - [Define an index that satisfies a given set of requirements](#define-an-index-that-satisfies-a-given-set-of-requirements)
 - Use the Data Visualizer to upload a text file into Elasticsearch
-- Define and use an index template for a given pattern that satisfies a given set of requirements
+- [Define and use an index template for a given pattern that satisfies a given set of requirements](#index-template)
 - Define and use a dynamic template that satisfies a given set of requirements
 - Define an Index Lifecycle Management policy for a time-series index
 - Define an index template that creates a new data stream
@@ -60,8 +60,6 @@ PUT /my-index-000001
 
 Les settings et le mapping peuvent se rajouter dans le body
 
-
-
 ```console
 PUT /test
 {
@@ -75,3 +73,21 @@ PUT /test
   }
 }
 ```
+
+### Index template
+
+Pour définir un template d'index, on peut soit définir des composants de templates via :
+
+```console
+PUT _component_template/template_1
+{ ... }
+```
+Soit mettre la configuration directement. On pourra ensuite choisir d'utiliser ou non des composants de template au moment de le définir le template via :
+```console
+PUT _index_template/template_1
+{ ... }
+```
+Parmi les options, il y a le mapping, le pattern des index auquels le template va s'appliquer, les settings de l'index... Pour choisir quel composant va s'appliquer en cas de recoupements des configurations, il faut définir une priorité différente pour chaque composant. (attention aussi aux templates built-in ES : `logs-*-*` , `metrics-*-*` et `synthetics-*-*`)
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-component-template.html
+https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html
