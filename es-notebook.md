@@ -7,7 +7,7 @@
 - [Define an index that satisfies a given set of requirements](#define-an-index-that-satisfies-a-given-set-of-requirements)
 - Use the Data Visualizer to upload a text file into Elasticsearch
 - [Define and use an index template for a given pattern that satisfies a given set of requirements](#index-template)
-- Define and use a dynamic template that satisfies a given set of requirements
+- [Define and use a dynamic template that satisfies a given set of requirements](#dynamic-template)
 - Define an Index Lifecycle Management policy for a time-series index
 - Define an index template that creates a new data stream
 
@@ -76,6 +76,8 @@ PUT /test
 
 ### Index template
 
+Un template doit être défini avant la création de l'index. Si on a besoin d'avoir des morceaux de templates communs à différents index, on peut définir des composants de templates (définition du mapping, des settings et des alias). Entre une configuration venant d'un composant et une configuration venant de l'appel Rest créant l'index, c'est ce dernier qui sera prioritaire en cas de recoupement.
+
 Pour définir un template d'index, on peut soit définir des composants de templates via :
 
 ```console
@@ -91,3 +93,15 @@ Parmi les options, il y a le mapping, le pattern des index auquel le template va
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-component-template.html
 https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html
+
+
+### Dynamic template
+
+Pour activer les templates dynamiques, il faut passer le paramètre "dynamic" à "true" ou à "runtime". Cela permet de définir un mapping pour des champs en fonction, par exemple, d'un format de nom d'un champ.  
+
+https://www.elastic.co/guide/en/elasticsearch/reference/7.14/dynamic-templates.html
+
+### To do si pas traité dans les autres sujets :
+- mappings
+- settings
+- alias
