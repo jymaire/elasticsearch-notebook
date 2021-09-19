@@ -5,7 +5,7 @@
 **Data Management**
 
 - [Define an index that satisfies a given set of requirements](#define-an-index-that-satisfies-a-given-set-of-requirements)
-- Use the Data Visualizer to upload a text file into Elasticsearch
+- [Use  the Data Visualizer to upload a text file into Elasticsearch](#data-visualizer)
 - [Define and use an index template for a given pattern that satisfies a given set of requirements](#index-template)
 - [Define and use a dynamic template that satisfies a given set of requirements](#dynamic-template)
 - Define an Index Lifecycle Management policy for a time-series index
@@ -74,9 +74,13 @@ PUT /test
 }
 ```
 
+### Data visualizer
+
+Sur la page d'accueil de Kibana, il y a un encart "Upload a file" dans la partie "Ingest your data". Il suffit de suivre les étapes pour ajouter un fichier puis définir l'index et ses propriétés.
+
 ### Index template
 
-Un template doit être défini avant la création de l'index. Si on a besoin d'avoir des morceaux de templates communs à différents index, on peut définir des composants de templates (définition du mapping, des settings et des alias). Entre une configuration venant d'un composant et une configuration venant de l'appel Rest créant l'index, c'est ce dernier qui sera prioritaire en cas de recoupement.
+Un template permet de pré définir une configuration qui sera appliquée au moment de la création d'un index. Si on a besoin d'avoir des morceaux de templates communs à différents index, on peut définir des composants de templates (définition du mapping, des settings et des alias). Entre une configuration venant d'un composant et une configuration venant de l'appel Rest créant l'index, c'est ce dernier qui sera prioritaire en cas de recoupement.
 
 Pour définir un template d'index, on peut soit définir des composants de templates via :
 
