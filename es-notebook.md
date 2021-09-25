@@ -15,7 +15,7 @@
 
 - Write and execute a search query for terms and/or phrases in one or more fields of an index
 - Write and execute a search query that is a Boolean combination of multiple queries and filters
--  Write an asynchronous search
+-  [Write an asynchronous search](asynchronous-search)
 - Write and execute metric and bucket aggregations
 - Write and execute aggregations that contain sub-aggregations
 - Write and execute a query that searches across multiple clusters
@@ -48,7 +48,7 @@
 
 
 
-
+## Data management
 
 ### Define an index that satisfies a given set of requirements
 
@@ -107,7 +107,7 @@ https://www.elastic.co/guide/en/elasticsearch/reference/7.14/dynamic-templates.h
 
 
 
-## Index Lifecycle Management
+### Index Lifecycle Management
 
 Cela permet de définir certaines actions sur les indexes de manière automatique. Il y a quatre phases pour un index : hot, warm, cold, frozen, delete. (hot -> actif, warm -> plus de mise à jour mais des requêtes, cold ->quelques requêtes, avec un temps de réponse qui sera un peu plus long, frozen -> de rare requêtes qui auront un temps de réponse très long, delete -> prêt à être supprimé)
 
@@ -116,6 +116,24 @@ Le but est de pouvoir rationaliser l'infrastructure, en déplaçant les données
 
 
 TODO : TP avec time series
+
+
+
+
+
+## Searching data
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/term-level-queries.html
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
+
+### Asynchronous search
+
+Cela se passe comme une recherche classique, seul le endpoint change (de \_search vers \_async_search). Un ID est retourné, celui ci permet de requêter les résultats plus tard via l'API `GET /_async_search/ID`.
+
+
 
 ### To do si pas traité dans les autres sujets :
 - mappings
