@@ -8,7 +8,7 @@
 - [Use  the Data Visualizer to upload a text file into Elasticsearch](#data-visualizer)
 - [Define and use an index template for a given pattern that satisfies a given set of requirements](#index-template)
 - [Define and use a dynamic template that satisfies a given set of requirements](#dynamic-template)
-- Define an Index Lifecycle Management policy for a time-series index
+- [Define an Index Lifecycle Management policy for a time-series index](index-lifecycle-management)
 - Define an index template that creates a new data stream
 
 **Searching Data**
@@ -105,7 +105,20 @@ Pour activer les templates dynamiques, il faut passer le paramètre "dynamic" à
 
 https://www.elastic.co/guide/en/elasticsearch/reference/7.14/dynamic-templates.html
 
+
+
+## Index Lifecycle Management
+
+Cela permet de définir certaines actions sur les indexes de manière automatique. Il y a quatre phases pour un index : hot, warm, cold, frozen, delete. (hot -> actif, warm -> plus de mise à jour mais des requêtes, cold ->quelques requêtes, avec un temps de réponse qui sera un peu plus long, frozen -> de rare requêtes qui auront un temps de réponse très long, delete -> prêt à être supprimé)
+
+Le but est de pouvoir rationaliser l'infrastructure, en déplaçant les données sur différents types de machines en fonction de leur étape dans le cycle de vie.
+
+
+
+TODO : TP avec time series
+
 ### To do si pas traité dans les autres sujets :
 - mappings
 - settings
 - alias
+
