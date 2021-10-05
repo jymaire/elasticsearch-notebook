@@ -115,12 +115,6 @@ Le but est de pouvoir rationaliser l'infrastructure, en déplaçant les données
 
 
 
-TODO : TP avec time series
-
-
-
-
-
 ## Searching data
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/term-level-queries.html
