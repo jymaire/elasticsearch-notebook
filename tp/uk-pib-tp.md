@@ -1,6 +1,6 @@
 Ajouter les données dans ES (index uk-pnb)
 
-### Création d'une gestion de cycle de vie d'index (index lifecycle management)
+### Création d'une gestion de cycle de vie d'index (index lifecycle management) et d'un data stream
 
 #### creation policy
 
@@ -14,71 +14,52 @@ sauvegarder
 
 Ajouter la policy à l'index
 
-PUT uk-pnb/_settings
-{
-  "index": {
-    "lifecycle" : {
-      "name": "uk-policy"
-    }
-  }
-}
-
-
-
-
-
-#### Ajout d'un runtime field
-
-On va rajouter un champ qui soit la somme de la population urbaine et de la population rurale.
-
-Deux manières de faire : soit dans la requête, soit dans le mapping.
-
-##### à la recherche
-
-`GET rural-population/_search`
+`PUT uk-pnb/_settings`
 `{`
-  `"size": 0,` 
-  `"runtime_mappings": {`
-    `"total-pop": {`
-      `"type": "long",`
-      `"script": {`
-        `"source": "emit(doc['Urban population'].value + doc['Rural population'].value)"`
-      `}`
-    `}`
-  `},`
-  `"aggs": {`
-    `"total-pop": {`
-      `"terms": {`
-        `"field": "total-pop",`
-        `"size": 10`
-      `}`
+  `"index": {`
+    `"lifecycle" : {`
+      `"name": "uk-policy"`
     `}`
   `}`
 `}`
 
-##### dans le mapping
+#### Ajout champ timestamp
 
-On commence par récupérer le mapping existant afin de pouvoir comparer 
-
-`GET rural-population/_mapping`
-
-On met à jour le mapping
+Nécessaire pour créer un data stream :
 
 `PUT rural-population/_mapping`
 `{`
-  `"properties": {`
-    `"total-pop": {`
-      `"type": "long",`
-      `"script": {`
-        `"source": "emit(doc['Urban population'].value + doc['Rural population'].value)"`
-      `}`
+  `"properties" : {`
+    `"@timestamp": {`
+      `"type" : "date"`
     `}`
   `}`
 `}`
 
-On peut vérifier qu'on voit bien les données
+#### Création d'un component template
 
-`GET rural-population/_search`
-`{`
-  `"fields": [ "total-pop" ]`
-`}`
+Aller dans stack management / index management / component templates puis create component template
+
+
+
+```
+PUT _component_template/uk-component
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        	}
+      	}
+       }
+	}
+}
+```
+
+Puis on va mettre à jour l'index template créé juste avant (bouton éditer sur l'index template puis suivre les flèches)
+
+
+
+
+

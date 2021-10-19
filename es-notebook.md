@@ -9,15 +9,15 @@
 - [Define and use an index template for a given pattern that satisfies a given set of requirements](#index-template)
 - [Define and use a dynamic template that satisfies a given set of requirements](#dynamic-template)
 - [Define an Index Lifecycle Management policy for a time-series index](index-lifecycle-management)
-- Define an index template that creates a new data stream
+- [Define an index template that creates a new data stream](data-stream)
 
 **Searching Data**
 
-- Write and execute a search query for terms and/or phrases in one or more fields of an index
-- Write and execute a search query that is a Boolean combination of multiple queries and filters
+- <u>Write and execute a search query for terms and/or phrases in one or more fields of an index</u> : ok, tp movies
+- <u>Write and execute a search query that is a Boolean combination of multiple queries and filters</u> : ok, tp movies
 -  [Write an asynchronous search](asynchronous-search)
-- Write and execute metric and bucket aggregations
-- Write and execute aggregations that contain sub-aggregations
+- <u>Write and execute metric and bucket aggregations</u> : ok tp movies
+- <u>Write and execute aggregations that contain sub-aggregations</u> : ok tp movies
 - Write and execute a query that searches across multiple clusters
 
 **Developing Search Applications**
@@ -113,7 +113,29 @@ Cela permet de définir certaines actions sur les indexes de manière automatiqu
 
 Le but est de pouvoir rationaliser l'infrastructure, en déplaçant les données sur différents types de machines en fonction de leur étape dans le cycle de vie.
 
+### Data stream
 
+Un data stream permet de stocker des données temporel en ajout uniquement. Il va créer des indices cachés. Notre point d'entrée pour requêter et indexer les données sera une sorte d'alias.
+
+Un DS est composé d'un ou plusieurs indices cachés, auto générés.
+
+Un DS a besoin d'un index template  "matching" qui contiennent le mapping et les settings des indices cachés.
+
+Il faut un index template et un champ @timestamp de type date ou date_nanos afin de pouvoir créer des data streams. Un data stream va permettre de créer automatiquement des indices en fonction de la date du document.
+
+Un index template peut être réutilisé pour plusieurs DS.
+
+La lecture se fait dans tous les indices cachés.
+
+L'écriture se fait uniquement dans l'indice le plus récent.
+
+Pour créer un nouvel index d'écriture, il faut faire un rollover (possiblement géré par un ILM, manuellement sinon)
+
+Quand on crée un component template, il faut inclure u**n champ @timestamp de type date et une lifecycle policy dans l'index setting**.
+
+Puis il faut créer un index template. Il faut que **le pattern des indices corresponde avec le nom du data stream**. Également **cocher l'activation des DS, ajouter les components templates avec le mapping et le setting d'index et une priorité supérieur à 200** pour éviter une collision avec les templates pré définis.
+
+Pour ajouter des documents, il faut passer par un POST et non par un PUT (ou un bulk avec l'ordre "create")
 
 ## Searching data
 
