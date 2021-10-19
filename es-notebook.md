@@ -18,7 +18,7 @@
 -  [Write an asynchronous search](asynchronous-search)
 - <u>Write and execute metric and bucket aggregations</u> : ok tp movies
 - <u>Write and execute aggregations that contain sub-aggregations</u> : ok tp movies
-- Write and execute a query that searches across multiple clusters
+- [Write and execute a query that searches across multiple clusters](remote-cluster)
 
 **Developing Search Applications**
 
@@ -149,7 +149,13 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-q
 
 Cela se passe comme une recherche classique, seul le endpoint change (de \_search vers \_async_search). Un ID est retourné, celui ci permet de requêter les résultats plus tard via l'API `GET /_async_search/ID`.
 
+### Remote cluster
 
+Il faut commencer par définir l'adresse des clusters distants dans les paramètres du cluster (point d'entrées `_cluster/settings`) puis après il faut préfixer le nom de l'index par `nom-du-cluster:` pour spécifier le cluster sur lequel on effectue la requête. Bien pensé à activer la licence (trial) afin d'avoir le droit de le faire.
+
+
+
+https://www.elastic.co/guide/en/elasticsearch/reference/7.15//modules-cross-cluster-search.html
 
 ### To do si pas traité dans les autres sujets :
 - mappings
